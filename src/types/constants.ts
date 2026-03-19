@@ -124,6 +124,19 @@ export const IRAQI_CITIES = [
   { id: 'Zakho',          en: 'Zakho',          ar: 'زاخو',             ku: 'زاخۆ' },
 ];
 
+export const CATEGORIES = [
+  { id: 'all', icon: '🔍', label: { en: 'All Categories', ar: 'كل الفئات', ku: 'هەموو پۆلەکان' } },
+  { id: 'Dining & Cuisine', icon: '🍽️', label: { en: 'Dining & Cuisine', ar: 'المطاعم والمأكولات', ku: 'خواردن و چێشتخانە' } },
+  { id: 'Shopping & Retail', icon: '🛍️', label: { en: 'Shopping & Retail', ar: 'التسوق والتجزئة', ku: 'بازاڕکردن و فرۆشتن' } },
+  { id: 'Entertainment & Events', icon: '🎭', label: { en: 'Entertainment & Events', ar: 'الترفيه والفعاليات', ku: 'کات بەسەربردن و چالاکی' } },
+  { id: 'Accommodation & Stay', icon: '🏨', label: { en: 'Accommodation & Stay', ar: 'الإقامة والسكن', ku: 'مانەوە و نیشتەجێبوون' } },
+  { id: 'Culture & Heritage', icon: '🏺', label: { en: 'Culture & Heritage', ar: 'الثقافة والتراث', ku: 'کەلتوور و میرات' } },
+  { id: 'Business & Services', icon: '💼', label: { en: 'Business & Services', ar: 'الأعمال والخدمات', ku: 'بازرگانی و خزمەتگوزاری' } },
+  { id: 'Health & Wellness', icon: '🧘', label: { en: 'Health & Wellness', ar: 'الصحة والعافية', ku: 'تەندروستی و باشی' } },
+  { id: 'Transport & Mobility', icon: '🚗', label: { en: 'Transport & Mobility', ar: 'النقل والمواصلات', ku: 'گواستنەوە و هاتوچۆ' } },
+  { id: 'Public & Essential', icon: '🏛️', label: { en: 'Public & Essential', ar: 'الخدمات العامة', ku: 'خزمەتگوزارییە گشتییەکان' } },
+];
+
 export const CATEGORY_IMAGES: Record<string, string> = {
   'Dining & Cuisine': 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400&h=300&fit=crop',
   'Shopping & Retail': 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=300&fit=crop',

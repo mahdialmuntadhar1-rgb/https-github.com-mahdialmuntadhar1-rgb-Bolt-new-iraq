@@ -1,5 +1,9 @@
-import { Globe } from 'lucide-react';
+import React, { useState } from 'react';
+import { Globe, PlusCircle } from 'lucide-react';
 import { Language } from '../types';
+import { UI_TEXT } from '../types/constants';
+import { Modal } from './Modal';
+import { BusinessForm } from './BusinessForm';
 
 const languages = [
   { code: 'en', label: 'English', dir: 'ltr', flag: '🇬🇧' },
@@ -13,6 +17,8 @@ interface HeaderProps {
 }
 
 export function Header({ lang, setLang }: HeaderProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <header className="sticky top-0 z-50 bg-[#0A0E1A]/80 backdrop-blur-md border-b border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
@@ -24,6 +30,14 @@ export function Header({ lang, setLang }: HeaderProps) {
         </div>
 
         <div className="flex items-center gap-4">
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="hidden md:flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 text-white rounded-full text-sm font-bold hover:bg-white/10 transition-all"
+          >
+            <PlusCircle className="w-4 h-4 text-[#6C63FF]" />
+            {UI_TEXT[lang].listYourBusiness}
+          </button>
+
           <div className="flex bg-white/5 rounded-full p-1 border border-white/10">
             {languages.map((l) => (
               <button
@@ -42,6 +56,14 @@ export function Header({ lang, setLang }: HeaderProps) {
           </div>
         </div>
       </div>
+
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title={UI_TEXT[lang].listYourBusiness}
+      >
+        <BusinessForm lang={lang} onSuccess={() => setIsModalOpen(false)} />
+      </Modal>
     </header>
   );
 }

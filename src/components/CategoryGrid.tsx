@@ -1,22 +1,10 @@
-import { CATEGORY_IMAGES, UI_TEXT } from '../types/constants';
+import { CATEGORY_IMAGES, UI_TEXT, CATEGORIES } from '../types/constants';
 import { Language } from '../types';
 
 interface CategoryGridProps {
   lang: Language;
   onCategoryClick: (category: string) => void;
 }
-
-const categories = [
-  { id: 'Dining & Cuisine', icon: '🍽️' },
-  { id: 'Shopping & Retail', icon: '🛍️' },
-  { id: 'Entertainment & Events', icon: '🎭' },
-  { id: 'Accommodation & Stay', icon: '🏨' },
-  { id: 'Culture & Heritage', icon: '🏺' },
-  { id: 'Business & Services', icon: '💼' },
-  { id: 'Health & Wellness', icon: '🧘' },
-  { id: 'Transport & Mobility', icon: '🚗' },
-  { id: 'Public & Essential', icon: '🏛️' },
-];
 
 export function CategoryGrid({ lang, onCategoryClick }: CategoryGridProps) {
   return (
@@ -30,7 +18,7 @@ export function CategoryGrid({ lang, onCategoryClick }: CategoryGridProps) {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {categories.map((cat) => (
+          {CATEGORIES.filter(c => c.id !== 'all').map((cat) => (
             <div
               key={cat.id}
               onClick={() => onCategoryClick(cat.id)}
@@ -49,7 +37,7 @@ export function CategoryGrid({ lang, onCategoryClick }: CategoryGridProps) {
                   {cat.icon}
                 </span>
                 <h3 className="text-lg font-bold text-white tracking-tight group-hover:text-[#FF6B9D] transition-colors">
-                  {cat.id}
+                  {cat.label[lang]}
                 </h3>
                 
                 <div className="absolute bottom-0 left-[20%] right-[20%] h-0.5 bg-gradient-to-r from-transparent via-[#6C63FF] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
