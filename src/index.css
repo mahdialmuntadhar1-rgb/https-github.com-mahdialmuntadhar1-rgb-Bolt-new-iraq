@@ -1,53 +1,54 @@
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Cairo", "Inter", ui-sans-serif, system-ui, sans-serif;
-  --color-primary: #1E3A5F;
-  --color-accent: #D4A017;
-  --color-bg: #F0F2F5;
-  --color-card: #FFFFFF;
-  --color-text-primary: #111827;
-  --color-text-secondary: #6B7280;
-  --color-text-muted: #9CA3AF;
-}
-
-@layer utilities {
-  .pb-safe {
-    padding-bottom: env(safe-area-inset-bottom, 20px);
-  }
-  .pt-safe {
-    padding-top: env(safe-area-inset-top, 40px);
-  }
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html, body, #root {
-  height: 100%;
+  --color-bg-primary: #0A0E1A;
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: rgba(255,255,255,0.7);
+  --color-text-muted: rgba(255,255,255,0.4);
 }
 
 body {
-  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  background-color: #000;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.glass-card {
+  background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.06);
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  background: rgba(255,255,255,0.08);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5), 0 0 30px rgba(108,99,255,0.2);
+  transform: translateY(-4px);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #6C63FF, #FF6B9D);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.sponsored-card {
+  border: 1px solid rgba(246, 201, 14, 0.4);
+  box-shadow: 0 0 25px rgba(246, 201, 14, 0.15), 0 8px 32px rgba(0,0,0,0.3);
+}
+
+.sponsored-card:hover {
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5), 0 0 30px rgba(246, 201, 14, 0.3);
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

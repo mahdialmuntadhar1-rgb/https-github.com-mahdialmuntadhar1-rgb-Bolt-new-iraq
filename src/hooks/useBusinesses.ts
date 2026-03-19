@@ -1,57 +1,49 @@
-import { useCallback, useEffect, useState } from 'react';
-import { getBusinesses } from '../services/businessService';
-import type { Business } from '../types';
+import { useState, useEffect } from 'react';
+import { supabase } from '../lib/supabase';
+import { Business } from '../types';
 
-interface UseBusinessesFilters {
-  category: string;
-  governorate: string;
-  rating: number;
-  search?: string;
-}
-
-interface UseBusinessesResult {
-  businesses: Business[];
-  totalCount: number;
-  isLoading: boolean;
-  error: string | null;
-  usingMockData: boolean;
-  reload: () => Promise<void>;
-}
-
-export const useBusinesses = (
-  filters: UseBusinessesFilters,
-  page: number,
-  pageSize: number,
-): UseBusinessesResult => {
+export function useBusinesses(selectedCity: string, selectedCategory: string, limit: number = 12) {
   const [businesses, setBusinesses] = useState<Business[]>([]);
-  const [totalCount, setTotalCount] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [usingMockData, setUsingMockData] = useState(false);
-
-  const loadBusinesses = useCallback(async () => {
-    setIsLoading(true);
-    setError(null);
-
-    const result = await getBusinesses({
-      page,
-      pageSize,
-      category: filters.category,
-      governorate: filters.governorate,
-      minRating: filters.rating,
-      search: filters.search,
-    });
-
-    setBusinesses(result.businesses);
-    setTotalCount(result.totalCount);
-    setUsingMockData(result.usingMockData);
-    setError(result.error);
-    setIsLoading(false);
-  }, [filters.category, filters.governorate, filters.rating, filters.search, page, pageSize]);
 
   useEffect(() => {
-    void loadBusinesses();
-  }, [loadBusinesses]);
+    async function fetchBusinesses() {
+      setLoading(true);
+      setError(null);
+      
+      try {
+        let query = supabase
+          .from('businesses')
+          .select('*')
+          .limit(limit);
 
-  return { businesses, totalCount, isLoading, error, usingMockData, reload: loadBusinesses };
-};
+        if (selectedCity !== 'all') {
+          query = query.eq('governorate', selectedCity);
+        }
+
+        if (selectedCategory !== 'all') {
+          query = query.eq('category', selectedCategory);
+        }
+
+        const { data, error: supabaseError } = await query;
+
+        if (supabaseError) {
+          console.error('Supabase error:', supabaseError.message, supabaseError.code, supabaseError.details);
+          setError(supabaseError.message);
+        } else {
+          setBusinesses(data || []);
+        }
+      } catch (err: any) {
+        console.error('Unexpected error:', err);
+        setError(err.message || 'An unexpected error occurred');
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchBusinesses();
+  }, [selectedCity, selectedCategory, limit]);
+
+  return { businesses, loading, error };
+}

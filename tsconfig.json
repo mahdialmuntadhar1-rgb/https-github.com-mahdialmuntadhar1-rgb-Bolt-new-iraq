@@ -1,17 +1,26 @@
 {
-  "extends": "../../tsconfig.base.json",
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "build", "dist", "**/*.test.ts"],
   "compilerOptions": {
-    "noEmit": true,
-    "jsx": "preserve",
-    "lib": ["esnext", "dom", "dom.iterable"],
-    "resolveJsonModule": true,
-    "allowImportingTsExtensions": true,
+    "target": "ES2022",
+    "experimentalDecorators": true,
+    "useDefineForClassFields": false,
+    "module": "ESNext",
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "skipLibCheck": true,
     "moduleResolution": "bundler",
-    "types": ["node", "vite/client"],
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "allowJs": true,
+    "jsx": "react-jsx",
     "paths": {
-      "@/*": ["./src/*"]
-    }
+      "@/*": [
+        "./*"
+      ]
+    },
+    "allowImportingTsExtensions": true,
+    "noEmit": true
   }
 }
