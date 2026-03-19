@@ -1,11 +1,12 @@
-<div align="center">
+# Iraqi Compass
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+Social city guide and business directory for Iraq. 6,955+ real businesses across 20 governorates.
 
-  <h1>Built with AI Studio</h2>
+## Deploy on Netlify
 
-  <p>The fastest path from prompt to production with Gemini.</p>
-
-  <a href="https://aistudio.google.com/apps">Start building</a>
-
-</div>
+1. Connect this repo to Netlify
+2. Build command: `npm install && npm run build`
+3. Publish directory: `dist`
+4. Set environment variables:
+   - `VITE_SUPABASE_URL` = `https://mxxaxhrtccomkazpvthn.supabase.co`
+   - `VITE_SUPABASE_ANON_KEY` = your Supabase anon key
